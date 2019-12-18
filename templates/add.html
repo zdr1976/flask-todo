@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- Section: Todo Add -->
+<section class="container">
+    <div class="row"></div>
+    <div class="row">
+        <form method="POST" action="" autocomplete="off">
+        {{ form.csrf_token }}
+        <div class="col s12 l6 offset-l3">
+            <div class="card hoverable">
+            <div class="card-action teal white-text">
+                <h4>Add ToDo</h4>
+            </div>
+            <div class="card-content">
+                <div class="input-field">
+                    {% if form.title.errors %}
+                        {{ form.title(class="validate invalid", pattern=".{3,20}") }}
+                        {% for error in form.title.errors %}
+                            <span class="helper-text" data-error="{{ error }}"></span>
+                        {% endfor %}
+                    {% else %}
+                        {{ form.title(class="validate", pattern=".{3,20}") }}
+                        <span class="helper-text" data-error="Title must be at least 3 characters long but no more then 20." data-success="Looks right">Enter your title (3-20 chars)</span>
+                    {% endif %}
+                  {{ form.title.label(class="transparent") }}
+                </div>
+                <div class="input-field">
+                    {% if form.description.errors %}
+                        {{ form.description(class="materialize-textarea validate invalid", pattern=".{0,120}") }}
+                        {% for error in form.description.errors %}
+                            <span class="helper-text" data-error="{{ error }}"></span>
+                        {% endfor %}
+                    {% else %}
+                        {{ form.description(class="materialize-textarea validate", maxlength="120") }}
+                        <span class="helper-text" data-error="Description can't be longer then 120 characters." data-success="Looks right">Enter your description (max 120 chars)</span>
+                    {% endif %}
+                  {{ form.description.label(class="transparent") }}
+                </div>
+                <div class="left-align">
+                    <label>
+                        {{ form.done(class="filled-in") }}
+                        <span>Mark as done</span>
+                    </lable>
+                </div>
+                <div class="center-align">
+                    <button class="btn-large waves-effect teal" type="submit">
+                        {% if update %}
+                        Update
+                        {% else %}
+                        Add
+                        {% endif %}
+                    </button>
+                </div>
+            </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</section>
+{% endblock content %}

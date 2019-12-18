@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- Section: Todo List -->
+<section class="container">
+<table class="responsive-table highlight">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Text</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for todo in todos.items %}
+        <tr>
+            {% if not todo.done %}
+            <td>{{ todo.title }}</td>
+            <td>{{ todo.added.strftime('%m %b %Y %H:%M') }}</td>
+            <td>{{ todo.description }}</td>
+            <td class="right-align">
+                <a href="{{ url_for('done_todo', todo_uuid=todo.uuid) }}"><i class="material-icons teal-text">done_outline</i></a>
+                <a href="{{ url_for('update_todo', todo_uuid=todo.uuid) }}"><i class="material-icons teal-text">edit</i></a>
+                <a href="{{ url_for('delete_todo', todo_uuid=todo.uuid) }}"><i class="material-icons teal-text">delete</i></a>
+            </td>
+            {% else %}
+            <td><del>{{ todo.title }}</del></td>
+            <td><del>{{ todo.added.strftime('%m %b %Y %H:%M') }}</del></td>
+            <td><del>{{ todo.description }}</del></td>
+            <td class="right-align">
+                <a href="{{ url_for('update_todo', todo_uuid=todo.uuid) }}"><i class="material-icons teal-text">edit</i></a>
+                <a href="{{ url_for('delete_todo', todo_uuid=todo.uuid) }}"><i class="material-icons teal-text">delete</i></a>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<!-- Pagination -->
+<div class="center-align">
+    <ul class="pagination">
+        {% for page in todos.iter_pages() %}
+            {% if page %}
+                {% if page == todos.page %}
+                <li class="active teal"><a href="{{ url_for('list_todo', page_num=page) }}">{{ page }}</a></li>
+                {% else %}
+                <li><a href="{{ url_for('list_todo', page_num=page) }}">{{ page }}</a></li>
+                {% endif %}
+            {% else %}
+            <li>...</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% if not todos.items %}
+<div class="row"></div>
+<div class="row">
+  <p class="center-align">
+    It looks like you don't have any task to complete. Please add one.
+  </p>
+</div>
+{% endif %}
+
+</section>
+
+<div class="fixed-action-btn">
+<a href="{{ url_for('add_todo') }}" class="btn-floating btn-large teal">
+    <i class="large material-icons">add</i>
+</a>
+</div>
+{% endblock content %}

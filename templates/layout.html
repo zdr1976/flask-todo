@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!--Let browser know website is optimized for mobile-->
+  <title>Todo</title>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar-fixed">
+    <nav class="teal">
+      <div class="container">
+        <div class="nav-wrapper">
+          <a href="{{ url_for('list_todo') }}" class="brand-logo"><i class="material-icons">check_box</i>Todo</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  {% block content %}{% endblock %}
+
+  <!--JavaScript at end of body for optimized loading-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Floating button
+      const add_btn = document.querySelectorAll('.fixed-action-btn');
+      M.FloatingActionButton.init(add_btn, {});
+    });
+  </script>
+</body>
+
+</html>

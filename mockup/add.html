@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    .pagination>li.active>a {
+      background: teal;
+    }
+  </style>
+  <title>Todo</title>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar-fixed">
+    <nav class="teal">
+      <div class="container">
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo"><i class="material-icons">check_box</i>Todo</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Section: Todo Add -->
+  <section class="container">
+    <div class="row"></div>
+    <div class="row">
+      <form method="POST" action="" autocomplete="off">
+        <div class="col s12 l6 offset-l3">
+          <div class="card hoverable">
+            <div class="card-action teal white-text">
+              <h4>Add ToDo</h4>
+            </div>
+            <div class="card-content">
+              <div class="input-field">
+                <input type="text" id="todo_title" class="validate" required="" aria-required="true" maxlength="20" data-length="20">
+                <label for="todo_title">Title</label>
+                <span class="helper-text" data-error="Field can't be empty" data-success="Looks right">Enter your title (max 20 chars)</span>
+              </div>
+              <div class="input-field">
+                <textarea id="todo_text" class="materialize-textarea" class="validate" required="" aria-required="true" maxlength="120" data-length="120"></textarea>
+                <label for="todo_text">Description</label>
+                <span class="helper-text" data-error="Field can't be empty" data-success="Looks right">Enter your description (max 120 chars)</span>
+              </div>
+              <div>
+                <label>
+                  <input type="checkbox" class="filled-in" checked="checked"/>
+                  <span>Mark as done</span>
+                </label>
+              </div>
+              <div class="center-align">
+                <button class="btn-large waves-effect teal" type="submit">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!--JavaScript at end of body for optimized loading-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Floating button
+      const f_btn = document.querySelectorAll('.fixed-action-btn');
+      M.FloatingActionButton.init(f_btn, {});
+      M.CharacterCounter.init(document.querySelectorAll('.has-character-counter'));
+    });
+  </script>
+</body>
+
+</html>
